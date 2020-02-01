@@ -4,7 +4,7 @@ let request = require('request-promise');
 
 module.exports = function(app) {
 	// get request for openweather api
-	app.get('/:search', async (req, res) => {
+	app.get('/location/:search', async (req, res) => {
 		// async function to get weather data
 		let getWeather = async (search) => {
 			// city search parameter
@@ -15,9 +15,9 @@ module.exports = function(app) {
 			let options = {
 				method: `GET`,
 				json: true,
-        uri: `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`
+				uri: `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`
 			};
-			//initialize data to be returned at the end
+			// initialize data to be returned at the end
 			let data;
 			// es8 form factor promise to get data from api
 			try {
@@ -28,10 +28,21 @@ module.exports = function(app) {
 			return data;
 		};
 		// get weather data :)
-		let weatherData = await getWeather(req.params.search);
-		// pass back weatherData to the browser
+    let weatherData = await getWeather(req.params.search);
+
+    console.log(weatherData);
+    
+    // example relevant data
+    let coords = weatherData.coord;
+    let temp = weatherData.main.temp;
+    let wind = weatherData.wind;
+    console.log(`Coords: ${coords}`);
+    console.log(`Temp:: ${temp}`);
+    console.log(`Wind:: ${wind}`);
+    
+    // pass back weatherData to the browser
 		res.json(weatherData);
-	});
+  });
 
 	// Get all examples
 	app.get('/api/examples', function(req, res) {
