@@ -1,4 +1,4 @@
-require("dotenv").config();
+require("dotenv").config({path: "./config/.env"});
 var express = require("express");
 var exphbs = require("express-handlebars");
 
@@ -8,7 +8,7 @@ var app = express();
 var PORT = process.env.PORT || 3000;
 
 // Middleware
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 
@@ -41,6 +41,11 @@ db.sequelize.sync(syncOptions).then(function() {
       PORT,
       PORT
     );
+
+    // debug: making sure api keys load
+    console.log(`weather api key:: ${process.env.openWeatherKey}`);
+    console.log(`hiking project api key:: ${process.env.hikingProjectKey}`);
+
   });
 });
 

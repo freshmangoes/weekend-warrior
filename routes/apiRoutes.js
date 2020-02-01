@@ -1,24 +1,49 @@
-var db = require("../models");
+var db = require('../models');
+// const axios = require(`axios`);
+const weather = require(`openweather-apis`);
 
 module.exports = function(app) {
-  // Get all examples
-  app.get("/api/examples", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
-      res.json(dbExamples);
-    });
-  });
+	// Get all examples
+	app.get('/api/examples', function(req, res) {
+		db.Example.findAll({}).then(function(dbExamples) {
+			res.json(dbExamples);
+		});
+	});
 
-  // Create a new example
-  app.post("/api/examples", function(req, res) {
-    db.Example.create(req.body).then(function(dbExample) {
-      res.json(dbExample);
-    });
-  });
+	// searches for weather in the area, using the path as the search term
+	app.get('/:search', async (req, res) => {
+		// function to get and *currently* pass weather to the user as json
+		var getWeather = async (search) => {
+			// api key
+			weather.setAPPID(process.env.openWeatherKey);
+			// setting the city to the desired search
+			weather.setCity(search);
+			// setting units to imperial
+			weather.setUnits(`imperial`);
+			// magic api call to do things
+			weather.getAllWeather((err, data) => {
+				if (err) throw err;
+				// pass the json from the api to the user
+				res.json(data);
+			});
+		};
 
-  // Delete an example by id
-  app.delete("/api/examples/:id", function(req, res) {
-    db.Example.destroy({ where: { id: req.params.id } }).then(function(dbExample) {
-      res.json(dbExample);
-    });
-  });
+		getWeather(req.params.search);
+	});
+
+	// Create a new example
+	app.post('/api/examples', function(req, res) {
+		db.Example.create(req.body).then(function(dbExample) {
+			res.json(dbExample);
+		});
+	});
+
+	// Delete an example by id
+	app.delete('/api/examples/:id', function(req, res) {
+		db.Example.destroy({ where: { id: req.params.id } }).then(function(
+			dbExample
+		) {
+			res.json(dbExample);
+		});
+	});
 };
