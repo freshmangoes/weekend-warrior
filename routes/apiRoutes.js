@@ -28,21 +28,21 @@ module.exports = function(app) {
 			return data;
 		};
 		// get weather data :)
-    let weatherData = await getWeather(req.params.search);
+		let weatherData = await getWeather(req.params.search);
 
-    console.log(weatherData);
-    
-    // example relevant data
-    let coords = weatherData.coord;
-    let temp = weatherData.main.temp;
-    let wind = weatherData.wind;
-    console.log(`Coords: ${coords}`);
-    console.log(`Temp:: ${temp}`);
-    console.log(`Wind:: ${wind}`);
-    
-    // pass back weatherData to the browser
+		console.log(weatherData);
+
+		// example relevant data
+		let coords = weatherData.coord;
+		let temp = weatherData.main.temp;
+		let wind = weatherData.wind;
+		console.log(`Coords: ${coords}`);
+		console.log(`Temp:: ${temp}`);
+		console.log(`Wind:: ${wind}`);
+
+		// pass back weatherData to the browser
 		res.json(weatherData);
-  });
+	});
 
 	// Get all examples
 	app.get('/api/examples', function(req, res) {
