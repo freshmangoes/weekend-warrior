@@ -1,15 +1,8 @@
 var db = require('../models');
-// const axios = require(`axios`);
 const weather = require(`openweather-apis`);
 
 module.exports = function(app) {
-	// Get all examples
-	app.get('/api/examples', function(req, res) {
-		db.Example.findAll({}).then(function(dbExamples) {
-			res.json(dbExamples);
-		});
-	});
-
+	// api route for openweather api
 	// searches for weather in the area, using the path as the search term
 	app.get('/:search', async (req, res) => {
 		// function to get and *currently* pass weather to the user as json
@@ -31,6 +24,13 @@ module.exports = function(app) {
 		getWeather(req.params.search);
 	});
 
+	// Get all examples
+	app.get('/api/examples', function(req, res) {
+		db.Example.findAll({}).then(function(dbExamples) {
+			res.json(dbExamples);
+		});
+	});
+
 	// Create a new example
 	app.post('/api/examples', function(req, res) {
 		db.Example.create(req.body).then(function(dbExample) {
@@ -40,9 +40,9 @@ module.exports = function(app) {
 
 	// Delete an example by id
 	app.delete('/api/examples/:id', function(req, res) {
-		db.Example.destroy({ where: { id: req.params.id } }).then(function(
-			dbExample
-		) {
+		db.Example.destroy({
+			where: { id: req.params.id }
+		}).then(function(dbExample) {
 			res.json(dbExample);
 		});
 	});
