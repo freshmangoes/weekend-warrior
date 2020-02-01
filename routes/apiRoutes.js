@@ -15,13 +15,13 @@ module.exports = function(app) {
 			let options = {
 				method: `GET`,
 				json: true,
-				uri: `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`
+        uri: `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`
 			};
 			//initialize data to be returned at the end
 			let data;
 			// es8 form factor promise to get data from api
 			try {
-				data = await request2(options);
+				data = await request(options);
 			} catch (err) {
 				console.log('err', err);
 			}
