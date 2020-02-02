@@ -1,37 +1,37 @@
 var db = require('../models');
-let axios = require('axios');
+const axios = require('axios');
 
 module.exports = function(app) {
 	// get request for openweather api
 	app.get('/location/:search', async (req, res) => {
 		// async function to get weather data
-		let getWeather = async (search) => {
+		const getWeather = async (search) => {
 			// city search parameter
-			let city = search;
+			const city = search;
 			// api key from dotenv
-      let apiKey = process.env.openWeather;
+      const apiKey = process.env.openWeather;
       // get url
-      let weatherUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
+      const weatherUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
 			// initialize data to be returned at the end
 			let data;
 			// es8 form factor promise to get data from api
 			try {
         data = await axios.get(weatherUrl);
 			} catch (err) {
-				console.log('err', err);
+        console.log('err', err);
 			}
-			return data;
+      return data;
 		};
 		// get weather data :)
-    let weatherData = await getWeather(req.params.search);
+    const weatherData = await getWeather(req.params.search);
     const result = weatherData.data;
 
 		console.log(weatherData);
 
 		// example relevant data
-		let coords = result.coord;
-		let temp = result.main.temp;
-		let wind = result.wind;
+		const coords = result.coord;
+		const temp = result.main.temp;
+		const wind = result.wind;
 		console.log(`Coords: ${coords}`);
 		console.log(`Temp:: ${temp}`);
 		console.log(`Wind:: ${wind}`);
