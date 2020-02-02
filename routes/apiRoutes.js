@@ -1,6 +1,5 @@
 var db = require('../models');
-// let request = require('request');
-let request = require('request-promise');
+let axios = require('axios');
 
 module.exports = function(app) {
 	// get request for openweather api
@@ -10,38 +9,35 @@ module.exports = function(app) {
 			// city search parameter
 			let city = search;
 			// api key from dotenv
-			let apiKey = process.env.openWeather;
-			//options for request-promise
-			let options = {
-				method: `GET`,
-				json: true,
-				uri: `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`
-			};
+      let apiKey = process.env.openWeather;
+      // get url
+      let weatherUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
 			// initialize data to be returned at the end
 			let data;
 			// es8 form factor promise to get data from api
 			try {
-				data = await request(options);
+        data = await axios.get(weatherUrl);
 			} catch (err) {
 				console.log('err', err);
 			}
 			return data;
 		};
 		// get weather data :)
-		let weatherData = await getWeather(req.params.search);
+    let weatherData = await getWeather(req.params.search);
+    const result = weatherData.data;
 
 		console.log(weatherData);
 
 		// example relevant data
-		let coords = weatherData.coord;
-		let temp = weatherData.main.temp;
-		let wind = weatherData.wind;
+		let coords = result.coord;
+		let temp = result.main.temp;
+		let wind = result.wind;
 		console.log(`Coords: ${coords}`);
 		console.log(`Temp:: ${temp}`);
 		console.log(`Wind:: ${wind}`);
 
 		// pass back weatherData to the browser
-		res.json(weatherData);
+		res.json(result);
 	});
 
 	// Get all examples
