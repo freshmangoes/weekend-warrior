@@ -56,16 +56,14 @@ module.exports = function(app) {
 
 		// get weather data :)
     const weatherData = await getWeather(req.params.search);
-    
-		console.log(weatherData);
-    
+        
 		// example relevant data
 		const coords = weatherData.coord;
 		const temp = weatherData.main.temp;
 		const wind = weatherData.wind;
-		console.log(`Coords: ${coords}`);
+		console.log(`Coords: ${JSON.stringify(coords, null, 2)}`);
 		console.log(`Temp:: ${temp}`);
-		console.log(`Wind:: ${wind}`);
+		console.log(`Wind:: ${JSON.stringify(wind, null, 2)}`);
     // get campsite data :)
     const campsiteData = await getCampgrounds(coords.lat, coords.lon);
     // get trail data :)
