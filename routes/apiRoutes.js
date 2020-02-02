@@ -3,7 +3,7 @@ const axios = require('axios');
 
 module.exports = function(app) {
 	// get request for openweather api
-	app.get('/location/:search', async (req, res) => {
+  app.get('/api/location/:search', async (req, res) => {
 		// async function to get weather data
 		const getWeather = async (search) => {
 			// city search parameter

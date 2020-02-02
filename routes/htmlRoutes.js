@@ -1,6 +1,11 @@
 var db = require('../models');
 
 module.exports = function(app) {
+  app.get('/location/:search', (req, res) => {
+    res.render('index', {
+      msg: 'Will have to render something for this page. ' + req.params.search
+    });
+  })
 	// Load index page
 	app.get('/', function(req, res) {
 		db.Example.findAll({}).then(function(dbExamples) {
@@ -9,7 +14,7 @@ module.exports = function(app) {
 				examples: dbExamples
 			});
 		});
-	});
+  });
 
 	// Load example page and pass in an example by id
 	app.get('/example/:id', function(req, res) {
