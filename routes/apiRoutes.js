@@ -19,25 +19,38 @@ module.exports = function(app) {
 			try {
 				data = await axios.get(weatherUrl);
 			} catch (err) {
-				console.log('err', err);
+				console.error('err::', err);
       }
       // return relevant json from data
 			return data.data;
 		};
 
 		const getCampgrounds = async (lat, lon) => {
+      const apiKey = process.env.hikingProject;
       // get url for campsite data
       //  uses lat, lon, and a max distance of 50mi
-      const campsitesUrl = `https://www.hikingproject.com/data/get-campgrounds?lat=${lat}&lon=${lon}&maxDistance=50&key=${process.env.hikingProject}`;
+      const campsitesUrl = `https://www.hikingproject.com/data/get-campgrounds?lat=${lat}&lon=${lon}&maxDistance=50&key=${apiKey}`;
       // initialize data to be returned at the end
       let data;
       // es8 form factor promise to get data from api
       try {
         data = await axios.get(campsitesUrl);
       } catch (err) {
-        console.error('err', err);
+        console.error('err::', err);
       }
       // return relevant json from data
+      return data.data;
+    };
+
+    const getTrails = async (lat, lon) => {
+      const apiKey = process.env.hikingProject;
+      const trailUrl = `https://www.hikingproject.com/data/get-trails?lat=40.0274&lon=-105.2519&maxDistance=10&key=${apiKey}`;
+      let data;
+      try {
+        data = await axios.get(trailUrl);
+      } catch(err) {
+        console.error('err::', err);
+      }
       return data.data;
     };
 
@@ -53,10 +66,12 @@ module.exports = function(app) {
 		console.log(`Coords: ${coords}`);
 		console.log(`Temp:: ${temp}`);
 		console.log(`Wind:: ${wind}`);
-    
+    // get campsite data :)
     const campsiteData = await getCampgrounds(coords.lat, coords.lon);
-		// pass back weatherData to the browser
-		res.json({weatherData, campsiteData});
+    // get trail data :)
+    const trailData = await getTrails(coords.lat, coords.lon);
+		// pass back weatherData, campsiteData, trailData to the browser
+		res.json({weatherData, campsiteData, trailData});
 	});
 
 	// Get all examples
