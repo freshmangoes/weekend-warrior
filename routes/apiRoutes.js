@@ -9,35 +9,54 @@ module.exports = function(app) {
 			// city search parameter
 			const city = search;
 			// api key from dotenv
-      const apiKey = process.env.openWeather;
-      // get url
-      const weatherUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
+			const apiKey = process.env.openWeather;
+      // get url for weather
+      //  uses a search for a city
+			const weatherUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
 			// initialize data to be returned at the end
 			let data;
 			// es8 form factor promise to get data from api
 			try {
-        data = await axios.get(weatherUrl);
+				data = await axios.get(weatherUrl);
 			} catch (err) {
-        console.log('err', err);
-			}
-      return data;
+				console.log('err', err);
+      }
+      // return relevant json from data
+			return data.data;
 		};
+
+		const getCampgrounds = async (lat, lon) => {
+      // get url for campsite data
+      //  uses lat, lon, and a max distance of 50mi
+      const campsitesUrl = `https://www.hikingproject.com/data/get-campgrounds?lat=${lat}&lon=${lon}&maxDistance=50&key=${process.env.hikingProject}`;
+      // initialize data to be returned at the end
+      let data;
+      // es8 form factor promise to get data from api
+      try {
+        data = await axios.get(campsitesUrl);
+      } catch (err) {
+        console.error('err', err);
+      }
+      // return relevant json from data
+      return data.data;
+    };
+
 		// get weather data :)
     const weatherData = await getWeather(req.params.search);
-    const result = weatherData.data;
-
+    
 		console.log(weatherData);
-
+    
 		// example relevant data
-		const coords = result.coord;
-		const temp = result.main.temp;
-		const wind = result.wind;
+		const coords = weatherData.coord;
+		const temp = weatherData.main.temp;
+		const wind = weatherData.wind;
 		console.log(`Coords: ${coords}`);
 		console.log(`Temp:: ${temp}`);
 		console.log(`Wind:: ${wind}`);
-
+    
+    const campsiteData = await getCampgrounds(coords.lat, coords.lon);
 		// pass back weatherData to the browser
-		res.json(result);
+		res.json({weatherData, campsiteData});
 	});
 
 	// Get all examples
