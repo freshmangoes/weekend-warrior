@@ -44,7 +44,7 @@ module.exports = function(app) {
 
     const getTrails = async (lat, lon) => {
       const apiKey = process.env.hikingProject;
-      const trailUrl = `https://www.hikingproject.com/data/get-trails?lat=40.0274&lon=-105.2519&maxDistance=10&key=${apiKey}`;
+      const trailUrl = `https://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${lon}&maxDistance=10&key=${apiKey}`;
       let data;
       try {
         data = await axios.get(trailUrl);
