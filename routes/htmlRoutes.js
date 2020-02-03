@@ -1,11 +1,11 @@
 var db = require('../models');
 
 module.exports = function(app) {
-  app.get('/location/:search', (req, res) => {
+  app.get('/location/search', (req, res) => {
     res.render('index', {
-      msg: 'Will have to render something for this page. ' + req.params.search
-    });
-  })
+		});
+		// res.redirect('/api/location/')
+  });
 	// Load index page
 	app.get('/', function(req, res) {
 		res.render('index');
