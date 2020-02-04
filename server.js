@@ -41,11 +41,6 @@ db.sequelize.sync(syncOptions).then(function() {
       PORT,
       PORT
     );
-
-    // debug: making sure api keys load
-    console.log(`weather api key:: ${process.env.openWeatherKey}`);
-    console.log(`hiking project api key:: ${process.env.hikingProjectKey}`);
-
   });
 });
 
