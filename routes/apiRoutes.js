@@ -1,29 +1,4 @@
 var db = require('../models');
-<<<<<<< HEAD
-const weather = require(`openweather-apis`);
-
-module.exports = function(app) {
-	// api route for openweather api
-	// searches for weather in the area, using the path as the search term
-	app.get('/:search', async (req, res) => {
-		// function to get and *currently* pass weather to the user as json
-		var getWeather = async (search) => {
-			// api key
-			weather.setAPPID(process.env.openWeatherKey);
-			// setting the city to the desired search
-			weather.setCity(search);
-			// setting units to imperial
-			weather.setUnits(`imperial`);
-			// magic api call to do things
-			weather.getAllWeather((err, data) => {
-				if (err) throw err;
-				// pass the json from the api to the user
-				res.json(data);
-			});
-		};
-
-		getWeather(req.params.search);
-=======
 const axios = require('axios');
 
 module.exports = function(app) {
@@ -95,7 +70,6 @@ module.exports = function(app) {
 		const trailData = await getTrails(coords.lat, coords.lon);
 		// pass back weatherData, campsiteData, trailData to the browser
 		res.json({ weatherData, campsiteData, trailData });
->>>>>>> ebdc69670b1c4012266757d0e8482a7cfcb927a1
 	});
 
 	// Get all examples
@@ -114,15 +88,9 @@ module.exports = function(app) {
 
 	// Delete an example by id
 	app.delete('/api/examples/:id', function(req, res) {
-<<<<<<< HEAD
-		db.Example.destroy({
-			where: { id: req.params.id }
-		}).then(function(dbExample) {
-=======
 		db.Example.destroy({ where: { id: req.params.id } }).then(function(
 			dbExample
 		) {
->>>>>>> ebdc69670b1c4012266757d0e8482a7cfcb927a1
 			res.json(dbExample);
 		});
 	});
