@@ -1,13 +1,10 @@
 // Get references to page elements
-var $searchText = $('#search-text');
-var $submitBtn = $('#submit');
-// var $exampleDescription = $('#example-description');
-// var $exampleList = $('#example-list');
-
+const $searchText = $('#search-text');
+const $submitBtn = $('#submit');
 
 // function to retrieve weather, campsite, and trail data
 // from openweather and hikingproject apis
-var getCombinationData = (searchTerm) => {
+const getCombinationData = (searchTerm) => {
 	return $.ajax({
 		url: `api/location/${searchTerm}`,
 		type: 'GET'
@@ -16,7 +13,7 @@ var getCombinationData = (searchTerm) => {
 
 // handleFormSubmit is called whenever we submit a new example
 // Save the new example to the db and refresh the list
-var handleFormSubmit = async function(event) {
+const handleFormSubmit = async function(event) {
 	event.preventDefault();
 
 	let search = $searchText.val().trim();
@@ -25,6 +22,8 @@ var handleFormSubmit = async function(event) {
 		return;
 	}
 
+	// debug statement for relevant data, making sure it gets passed to 
+	// the front end
 	console.log('search::', search);
 	let data = await getCombinationData(search);
 	console.log('weather data::', data.weatherData);
