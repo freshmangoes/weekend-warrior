@@ -35,7 +35,6 @@ if (process.env.NODE_ENV === 'test') {
 
 // Starting the server, syncing our models ------------------------------------/
 db.sequelize.sync(syncOptions).then(function() {
-<<<<<<< HEAD
   app.listen(PORT, function() {
     console.log(
       "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
@@ -48,15 +47,6 @@ db.sequelize.sync(syncOptions).then(function() {
     console.log(`hiking project api key:: ${process.env.hikingProjectKey}`);
 
   });
-=======
-	app.listen(PORT, function() {
-		console.log(
-			'==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.',
-			PORT,
-			PORT
-		);
-	});
->>>>>>> ebdc69670b1c4012266757d0e8482a7cfcb927a1
 });
 
 module.exports = app;
