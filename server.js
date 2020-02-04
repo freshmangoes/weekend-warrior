@@ -1,14 +1,6 @@
-<<<<<<< HEAD
 require("dotenv").config({path: "./config/.env"});
 var express = require("express");
 var exphbs = require("express-handlebars");
-=======
-require('dotenv').config({
-	path: './config/.env'
-});
-var express = require('express');
-var exphbs = require('express-handlebars');
->>>>>>> ebdc69670b1c4012266757d0e8482a7cfcb927a1
 
 var db = require('./models');
 
