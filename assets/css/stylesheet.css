@@ -1,0 +1,42 @@
+body {
+    background-image: url("../images/41ddl0049rf-1.jpg"); 
+    
+
+}
+.navsize {
+    padding-top: 25px;
+    padding-bottom: 0px;
+}
+
+.rightlinks {
+   padding-right: 80px;
+}
+.searchbox {
+    margin-top: 100px;
+    font-weight: 400;
+  
+}
+.jumbox {
+    background-color: white;
+    max-width: 700px;
+    height: 300px;
+    margin: auto;
+    
+}
+.introhead {
+    margin-top: 80px;
+    font-size: 60px;
+    color: black;
+}
+h2.jumtext {
+    padding-top: 20px;
+   
+}
+.search-button {
+    margin-top: 20px;
+}
+.textform {
+    padding-top: 15px;
+    max-width: 500px;
+    
+}
