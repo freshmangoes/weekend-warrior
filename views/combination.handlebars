@@ -1,19 +1,40 @@
 <div class="container">
   <div class="row">
     <div class="col-8 offset-2">
+
       <div class="card mt-4">
         <div class="card-body">
-          <h5 class="card-title">Example</h5>
+          <h5 class="card-title">Weather</h5>
           <p>
-            <strong>ID</strong>: {{example.id}}</p>
-          <p>
-          <p>
-            <strong>Text</strong>: {{example.text}}</p>
-          <p>
-            <strong>Description:</strong> {{example.description}}</p>
-            <a href="/">← Back To Home</a>
+            <strong>Weather</strong>: 
+            {{temp.main.temp}}
+          </p>
         </div>
       </div>
+
+      <div class="card mt-4">
+        <div class="card-body">
+          <h5 class="card-title">Camps</h5>
+          <p>
+            <strong>Campsites</strong>: 
+            {{camps}}
+          <p>
+        </div>
+      </div>
+
+      <div class="card mt-4">
+        <div class="card-body">
+          <h5 class="card-title">Trails</h5>
+
+          <p>
+            <strong>Trails:</strong> 
+            {{trails}}
+          </p>
+        </div>
+      </div>
+
+      <a href="/">← Back To Home</a>
+
     </div>
   </div>
 </div>

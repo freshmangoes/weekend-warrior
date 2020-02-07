@@ -6,7 +6,7 @@ const $submitBtn = $('#submit');
 // from openweather and hikingproject apis
 const getCombinationData = (searchTerm) => {
 	return $.ajax({
-		url: `api/location/${searchTerm}`,
+		url: `/api/location/${searchTerm}`,
 		type: 'GET'
 	});
 }
@@ -24,13 +24,14 @@ const handleFormSubmit = async function(event) {
 
 	// debug statement for relevant data, making sure it gets passed to 
 	// the front end
-	console.log('search::', search);
-	let data = await getCombinationData(search);
-	console.log('weather data::', data.weatherData);
-	console.log('trail data::', data.trailData);
-	console.log('campsite data::', data.campsiteData);
+	// console.log('search::', search);
+	// let data = await getCombinationData(search);	
+	// console.log('weather data::', data.weatherData);
+	// console.log('trail data::', data.trailData);
+	// console.log('campsite data::', data.campsiteData);
 
-
+	let url = `/location/${search}`;
+	location.replace(url);
 };
 
 
