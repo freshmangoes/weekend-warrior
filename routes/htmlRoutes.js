@@ -82,7 +82,7 @@ module.exports = function(app) {
 		{
 			weatherMain: data.weatherData.main,
 			weatherWind: data.weatherData.wind,
-			weather: data.weatherData.weather[0],
+			weatherOV: data.weatherData.weather[0],
 			trails: data.trailData,
 			camps: data.campsiteData
 		});

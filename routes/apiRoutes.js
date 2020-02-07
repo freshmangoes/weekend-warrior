@@ -71,7 +71,6 @@ module.exports = function(app) {
 	app.get('/api/location/:search', async (req, res) => {
 		// data from openweather-api, hikingproject
 		const data = await getComboData(req.params.search); 
-		// console.log(JSON.stringify(data, null, 2));
 		res.json(data);
 	});
 };
