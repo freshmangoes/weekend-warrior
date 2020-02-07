@@ -6,8 +6,19 @@
         <div class="card-body">
           <h5 class="card-title">Weather</h5>
           <p>
-            <strong>Weather</strong>: 
-            {{temp.main.temp}}
+            <strong>Weather</strong>:
+            <li>
+              <p>Overview</p>
+              <p>Today:: {{weather.main}}</p>
+              {{!-- Find a way to render the icon! --}}
+              <p>Icon:: {{weather.icon}}</p>
+            </li>
+            <li>Temperature:: {{weatherMain.temp}}F</li>
+            <li>Feels like:: {{weatherMain.feels_like}}F</li>
+            <li>High:: {{weatherMain.temp_max}}F</li>
+            <li>Low:: {{weatherMain.temp_min}}F</li>
+            <li>Humidity:: {{weatherMain.humidity}}%</li>
+            <li>Wind:: {{weatherWind.speed}}mph</li>
           </p>
         </div>
       </div>
@@ -16,8 +27,17 @@
         <div class="card-body">
           <h5 class="card-title">Camps</h5>
           <p>
-            <strong>Campsites</strong>: 
-            {{camps}}
+            <strong>Campsites</strong>:
+            {{#each camps.campgrounds}}
+              <ul>
+                <li>
+                  <p>Name:: {{this.name}}</p>
+                  <p>Location:: {{this.location}}</p>
+                  <p>Url:: {{this.url}}</p>
+                  <p>ImgUrl:: {{this.imgUrl}}</p>
+                </li>
+              </ul>
+            {{/each}} 
           <p>
         </div>
       </div>
@@ -27,8 +47,20 @@
           <h5 class="card-title">Trails</h5>
 
           <p>
-            <strong>Trails:</strong> 
-            {{trails}}
+            <strong>Trails:</strong>
+            {{#each trails.trails}} 
+            <li>
+              <p>Name:: {{this.name}}</p>
+              <p>Type:: {{this.type}}</p>
+              <p>Summary:: {{this.summary}}</p>
+              <p>Difficulty:: {{this.difficulty}}</p>
+              <p>Location:: {{this.location}}</p>
+              <p>Condition:: {{this.conditionStatus}}</p>
+              <p>Condition Details:: {{this.conditionDetails}}</p>
+              <p>Url:: {{this.url}}</p>
+              <p>Rating:: {{this.stars}}</p>
+            </li>
+            {{/each}}
           </p>
         </div>
       </div>

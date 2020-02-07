@@ -80,7 +80,9 @@ module.exports = function(app) {
 		console.log('data::', JSON.stringify(data, null, 2));
 		res.render('combination', 
 		{
-			temp: data.weatherData,
+			weatherMain: data.weatherData.main,
+			weatherWind: data.weatherData.wind,
+			weather: data.weatherData.weather[0],
 			trails: data.trailData,
 			camps: data.campsiteData
 		});
