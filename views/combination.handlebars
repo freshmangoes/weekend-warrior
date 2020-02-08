@@ -1,0 +1,80 @@
+<div class="container">
+  <div class="row">
+    <div class="col-8 offset-2">
+
+      <div class="card mt-4">
+        <div class="card-body">
+          <h5 class="card-title">Weather</h5>
+          <p>
+            <strong>Weather</strong>:
+            <ul>
+              <li>
+                <p>Overview</p>
+                <p>Today:: {{weatherOV.main}}</p>
+                {{!-- displays weather icon :) --}}
+                <p>Icon:: {{weatherOV.icon}}</p>
+                <img src="http://openweathermap.org/img/w/{{weatherOV.icon}}.png" alt="">
+              </li>
+              <li>Temperature:: {{weatherMain.temp}}F</li>
+              <li>Feels like:: {{weatherMain.feels_like}}F</li>
+              <li>High:: {{weatherMain.temp_max}}F</li>
+              <li>Low:: {{weatherMain.temp_min}}F</li>
+              <li>Humidity:: {{weatherMain.humidity}}%</li>
+              <li>Wind:: {{weatherWind.speed}}mph</li>
+            </ul>
+          </p>
+        </div>
+      </div>
+
+      <div class="card mt-4">
+        <div class="card-body">
+          <h5 class="card-title">Camps</h5>
+          <p>
+            <strong>Campsites</strong>:
+            {{#each camps.campgrounds}}
+              <ul>
+                <li>
+                  <p>Name:: {{this.name}}</p>
+                  <p>Location:: {{this.location}}</p>
+                  <p>Url:: {{this.url}}</p>
+                  <p>ImgUrl:: {{this.imgUrl}}</p>
+                </li>
+              </ul>
+            {{/each}} 
+          <p>
+        </div>
+      </div>
+
+      <div class="card mt-4">
+        <div class="card-body">
+          <h5 class="card-title">Trails</h5>
+
+          <p>
+            <strong>Trails:</strong>
+            {{#each trails.trails}} 
+            <ul>
+              <li>
+                <p>Name:: {{this.name}}</p>
+                <p>Type:: {{this.type}}</p>
+                <p>Summary:: {{this.summary}}</p>
+                <p>Difficulty:: {{this.difficulty}}</p>
+                <p>Location:: {{this.location}}</p>
+                <p>Condition:: {{this.conditionStatus}}</p>
+                <p>Condition Details:: {{this.conditionDetails}}</p>
+                <p>Url:: {{this.url}}</p>
+                <p>Rating:: {{this.stars}}</p>
+                <p>Lat/Lon:: {{this.latitude}}, {{this.longitude}}</p>
+                <a href="http://www.google.com/maps/place/{{this.latitude}},{{this.longitude}}">Map link</a>
+              </li>
+            </ul>
+            {{/each}}
+          </p>
+        </div>
+      </div>
+
+      <a href="/">← Back To Home</a>
+
+    </div>
+  </div>
+</div>
+{{!-- <script src="/js/combo.js"></script> --}}
