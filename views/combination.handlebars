@@ -63,6 +63,8 @@
                 <p>Condition Details:: {{this.conditionDetails}}</p>
                 <p>Url:: {{this.url}}</p>
                 <p>Rating:: {{this.stars}}</p>
+                <p>Lat/Lon:: {{this.latitude}}, {{this.longitude}}</p>
+                <a href="http://www.google.com/maps/place/{{this.latitude}},{{this.longitude}}">Map link</a>
               </li>
             </ul>
             {{/each}}
@@ -75,5 +77,4 @@
     </div>
   </div>
 </div>
-
-<script src="/js/combo.js"></script>
+{{!-- <script src="/js/combo.js"></script> --}}

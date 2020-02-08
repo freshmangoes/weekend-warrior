@@ -1,3 +1,5 @@
-const flags = require('./index.js');
-console.log(flags.trailCheck);
-console.log(flags.campCheck);
+const trailFlag = checkBoxes.trails;
+const campFlag = checkBoxes.campsites;
+
+console.log(`trailFlag:: ${trailFlag}`);
+console.log(`campFlag:: ${campFlag}`);
