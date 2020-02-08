@@ -1,4 +1,4 @@
-var db = require('../models');
+var db = require('../models/');
 const axios = require('axios');
 
 module.exports = function(app) {
@@ -24,6 +24,7 @@ module.exports = function(app) {
 			// return relevant json from data
 			return data.data;
 		};
+
 
 		const getCampgrounds = async (lat, lon) => {
 			const apiKey = process.env.hikingProject;
@@ -72,26 +73,38 @@ module.exports = function(app) {
 		res.json({ weatherData, campsiteData, trailData });
 	});
 
-	// Get all examples
-	app.get('/api/examples', function(req, res) {
-		db.Example.findAll({}).then(function(dbExamples) {
-			res.json(dbExamples);
-		});
-	});
 
-	// Create a new example
-	app.post('/api/examples', function(req, res) {
-		db.Example.create(req.body).then(function(dbExample) {
-			res.json(dbExample);
-		});
-	});
 
-	// Delete an example by id
-	app.delete('/api/examples/:id', function(req, res) {
-		db.Example.destroy({ where: { id: req.params.id } }).then(function(
-			dbExample
-		) {
-			res.json(dbExample);
+app.post("/api/add", function(req, res) {
+	console.log (req.body)
+    db.destination_search.create(req.body)
+      .then(function(dbPost) {
+        res.json(dbPost);
+      });
+  });
+
+app.get("/api/get/:location_name", function(req, res) {
+
+	db.destination_search.findAll({
+		where: {
+			destination_name: req.params.location_name
+		}
+	}).then(function(destination_search) {
+		res.json(destination_search)
+	})
+});
+
+app.put("/api/update/", function(req, res) {
+	console.log("update body")
+	console.log (req.body)
+	db.destination_search.update(req.body,
+		{
+			where: {
+				id: req.body.id
+			}
+		})
+		.then(function(dbPost) {
+			res.json(dbPost);
 		});
 	});
 };
