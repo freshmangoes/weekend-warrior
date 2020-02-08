@@ -1,5 +1,4 @@
 const db = require('../models');
-
 const axios = require('axios');
 
 const getComboData = async (search) => {
@@ -24,11 +23,11 @@ const getComboData = async (search) => {
 		return data.data;
 	};
 
-	const getCampgrounds = async (lat, lon) => {
+	const getCampgrounds = async (lat, lon, radius) => {
 		const apiKey = process.env.hikingProject;
 		// get url for campsite data
 		//  uses lat, lon, and a max distance of 50mi
-		const campsitesUrl = `https://www.hikingproject.com/data/get-campgrounds?lat=${lat}&lon=${lon}&maxDistance=50&key=${apiKey}`;
+		const campsitesUrl = `https://www.hikingproject.com/data/get-campgrounds?lat=${lat}&lon=${lon}&maxDistance=${radius}&key=${apiKey}`;
 		// initialize data to be returned at the end
 		let data;
 		// es8 form factor promise to get data from api
@@ -41,9 +40,9 @@ const getComboData = async (search) => {
 		return data.data;
 	};
 
-	const getTrails = async (lat, lon) => {
+	const getTrails = async (lat, lon, radius) => {
 		const apiKey = process.env.hikingProject;
-		const trailUrl = `https://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${lon}&maxDistance=10&key=${apiKey}`;
+		const trailUrl = `https://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${lon}&maxDistance=${radius}&key=${apiKey}`;
 		let data;
 		try {
 			data = await axios.get(trailUrl);
@@ -60,9 +59,9 @@ const getComboData = async (search) => {
 	const coords = weatherData.coord;
 
 	// get campsite data :)
-	const campsiteData = await getCampgrounds(coords.lat, coords.lon);
+	const campsiteData = await getCampgrounds(coords.lat, coords.lon, 10);
 	// get trail data :)
-	const trailData = await getTrails(coords.lat, coords.lon);
+	const trailData = await getTrails(coords.lat, coords.lon, 10);
 
 	return { weatherData, campsiteData, trailData };
 };
@@ -78,8 +77,7 @@ module.exports = function(app) {
 		console.log('search::', search);
 		const data = await getComboData(search);
 		console.log('data::', JSON.stringify(data, null, 2));
-		res.render('combination', 
-		{
+		res.render('combination', {
 			weatherMain: data.weatherData.main,
 			weatherWind: data.weatherData.wind,
 			weatherOV: data.weatherData.weather[0],

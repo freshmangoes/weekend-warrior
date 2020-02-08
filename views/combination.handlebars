@@ -11,8 +11,9 @@
               <li>
                 <p>Overview</p>
                 <p>Today:: {{weatherOV.main}}</p>
-                {{!-- Find a way to render the icon! --}}
+                {{!-- displays weather icon :) --}}
                 <p>Icon:: {{weatherOV.icon}}</p>
+                <img src="http://openweathermap.org/img/w/{{weatherOV.icon}}.png" alt="">
               </li>
               <li>Temperature:: {{weatherMain.temp}}F</li>
               <li>Feels like:: {{weatherMain.feels_like}}F</li>
@@ -74,3 +75,5 @@
     </div>
   </div>
 </div>
+
+<script src="/js/combo.js"></script>
