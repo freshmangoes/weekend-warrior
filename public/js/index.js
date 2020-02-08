@@ -3,26 +3,7 @@ $(document).ready(function() {
 	var $searchText = $('#search-text');
 	var $searchTextAdd = $('#search-text');
 	var $submitBtn = $('#submit');
-	// var $addBtn = $('#addButton');
 
-	// handleFormSubmit is called whenever we submit a new example
-	// Save the new example to the db and refresh the list
-	// var handleFormSubmit = async function(event) {
-	// 	event.preventDefault();
-
-	// 	let search = $searchText.val().trim();
-	// 	if (!search) {
-	// 		alert('You must enter a city or town to search nearby!');
-	// 		return;
-	// 	}
-
-	// 	let url = `/location/${search}`;
-	// 	location.replace(url);
-	// };
-
-	var cb = function() {
-		console.log('this is the callback');
-	};
 	var handleAddButton = function(event) {
 		event.preventDefault();
 
@@ -33,7 +14,7 @@ $(document).ready(function() {
 		}
 
 		let url = `/location/${search}`;
-		
+
 		console.log('hello');
 		var data_row;
 		var count;
@@ -77,7 +58,7 @@ $(document).ready(function() {
 					url: '/api/update/',
 					data: data_row
 				}).then(function() {
-					console.log('hello');
+					console.log('updated');
 				});
 			}
 		});
