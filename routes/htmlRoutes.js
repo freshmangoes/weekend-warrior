@@ -86,8 +86,19 @@ module.exports = function(app) {
 		});
 	});
 
+
+	app.get('/api/add',function(req,res){
+		res.render('index')
+	})
+
+	app.get("/api/get/:location_name", function(req, res) {
+		res.render('index')
+	})
+
 	// Render 404 page for any unmatched routes
-	app.get('*', function(req, res) {
-		res.render('404');
-	});
+	// app.get('*', function(req, res) {
+	// 	res.render('404');
+	// });
+
+
 };
