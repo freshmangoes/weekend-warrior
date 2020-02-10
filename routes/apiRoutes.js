@@ -1,7 +1,6 @@
 var db = require('../models');
 module.exports = function(app) {
 	app.post('/api/add', function(req, res) {
-		// console.log (req.body)
 		db.destination_search.create(req.body).then(function(dbPost) {
 			res.json(dbPost);
 		});
@@ -20,8 +19,7 @@ module.exports = function(app) {
 	});
 
 	app.put('/api/update/', function(req, res) {
-		console.log('update body');
-		console.log(req.body);
+
 		db.destination_search
 			.update(req.body, {
 				where: {
