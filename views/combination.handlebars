@@ -21,11 +21,13 @@
               <li>Low:: {{weatherMain.temp_min}}F</li>
               <li>Humidity:: {{weatherMain.humidity}}%</li>
               <li>Wind:: {{weatherWind.speed}}mph</li>
+              <li>{{renderTrails}} // {{renderCamps}}</li>
             </ul>
           </p>
         </div>
       </div>
 
+      {{#if renderCamps}}
       <div class="card mt-4">
         <div class="card-body">
           <h5 class="card-title">Camps</h5>
@@ -44,7 +46,9 @@
           <p>
         </div>
       </div>
+      {{/if}}
 
+      {{#if renderTrails}}
       <div class="card mt-4">
         <div class="card-body">
           <h5 class="card-title">Trails</h5>
@@ -71,6 +75,7 @@
           </p>
         </div>
       </div>
+      {{/if}}
 
       <a href="/">← Back To Home</a>
 
