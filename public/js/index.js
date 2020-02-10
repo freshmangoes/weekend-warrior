@@ -10,18 +10,23 @@ $(document).ready(function() {
 		let search = $searchText.val().trim();
 		let searchRadius = $searchRadius.val();
 		console.log(`searchRadius:: ${searchRadius}`);
+		
 		if (!search) {
-			alert('You must enter a city or town to search nearby!');
+			console.log('bad search');
+			swal.fire({
+				title: 'Error!',
+				text: 'You must enter a location to search!',
+				icon: 'error',
+				confirmButtonText: 'Understood'
+			});
 			return;
 		}
 
 		let url = `/location/${search}&${searchRadius}`;
 
-		var data_row;
-		var count;
-
 		//this funtion adds up the number of searches
 		$.get('api/get/' + search, function(data) {
+			let data_row, count;
 
 			if (Object.keys(data).length === 0) {
 				count = 1;
@@ -33,18 +38,13 @@ $(document).ready(function() {
 				$.post('/api/add', data_row);
 			} else {
 				count = data[0].searches + 1;
-				console.log('dataid' + data[0].id);
-				console.log('updating row');
-				console.log('count' + count);
 				data_id = data[0].id;
 				data_row = {
 					id: data[0].id,
 					searches: count,
 					destination_name: search
 				};
-				// $.put("/api/update/", data_row)
-				//there is no such thing as $.put, so we use an
-				//ajax call instead
+
 				$.ajax({
 					method: 'PUT',
 					url: '/api/update/',
@@ -52,16 +52,14 @@ $(document).ready(function() {
 				}).then(function() {
 					console.log('updated');
 				});
+
 			}
 		});
-		if (!search) {
-			alert('You must enter a city or town to search nearby!');
-			return;
-		}
+
 		location.replace(url);
+
 	};
 
 	// Add event listeners to the submit and delete buttons
-	// $submitBtn.on('click', handleAddButton);
 	$submitBtn.on('click', handleAddButton);
 });

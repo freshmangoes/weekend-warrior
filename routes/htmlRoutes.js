@@ -68,10 +68,6 @@ const getComboData = async (search, radius) => {
 
 module.exports = function(app) {
 	// Load index page
-	// app.get('/', function(req, res) {
-	// 	res.render('index');
-	// });
-
 	app.get('/', function(req, res) {
 		db.destination_search.findAll({}).then(function(data){
 			var hbsObject = JSON.parse(JSON.stringify(data));
