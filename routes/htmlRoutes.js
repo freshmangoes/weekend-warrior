@@ -71,8 +71,6 @@ module.exports = function(app) {
 	app.get('/', function(req, res) {
 		db.destination_search.findAll({}).then(function(data){
 			var hbsObject = JSON.parse(JSON.stringify(data));
-			console.log(hbsObject);
-			console.log(data);
 			res.render('index', {destination_searches: hbsObject});
 		});
 	});
@@ -80,16 +78,12 @@ module.exports = function(app) {
 	app.get('/location/:search&:radius', async (req, res) => {
 		let search = req.params.search;
 		let radius = req.params.radius;
-
-		console.log(`radius:: ${radius}`);
-		console.log('search::', search);
 		
 		// variables to determine what data is getting rendered
 		let renderTrails = true;
 		let renderCamps = true;
 
 		const data = await getComboData(search, radius);
-		// console.log(data.weatherData);
 
 		// check whether any campgrounds get get pulled from the api
 		if (!data.campsiteData.campgrounds.length) {

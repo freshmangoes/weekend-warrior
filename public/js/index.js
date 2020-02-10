@@ -4,7 +4,7 @@ $(document).ready(function() {
 	const $submitBtn = $('#submit');
 	const $searchRadius = $('#search-radius');
 
-	const handleAddButton = function(event) {
+	const handleAddButton = (event) => {
 		event.preventDefault();
 
 		let search = $searchText.val().trim();
@@ -25,9 +25,8 @@ $(document).ready(function() {
 		let url = `/location/${search}&${searchRadius}`;
 
 		//this funtion adds up the number of searches
-		$.get('api/get/' + search, function(data) {
+		$.get('/api/get/' + search, function(data) {
 			let data_row, count;
-
 			if (Object.keys(data).length === 0) {
 				count = 1;
 				data_row = {
@@ -50,13 +49,12 @@ $(document).ready(function() {
 					url: '/api/update/',
 					data: data_row
 				}).then(function() {
-					console.log('updated');
+					console.log('updated');	
 				});
-
 			}
-		});
 
-		location.replace(url);
+			location.replace(url);
+		});
 
 	};
 

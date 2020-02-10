@@ -10,10 +10,8 @@
               <strong>Overview</strong>
               <ul>
                 <li>
-                  {{!-- <p> --}}
-                    {{weatherOV.main}}
-                    <img src="http://openweathermap.org/img/w/{{weatherOV.icon}}.png" alt="">
-                  {{!-- </p> --}}
+                  {{weatherOV.main}}
+                  <img src="http://openweathermap.org/img/w/{{weatherOV.icon}}.png" alt="">
                 </li>
                 <li>
                   Humidity: {{weatherMain.humidity}}%
@@ -66,26 +64,41 @@
         <div class="card-body">
           <h5 class="card-title">Trails</h5>
 
-          <p>
-            <strong>Trails:</strong>
-            {{#each trails.trails}} 
-            <ul>
-              <li>
-                <p>Name:: {{this.name}}</p>
-                <p>Type:: {{this.type}}</p>
-                <p>Summary:: {{this.summary}}</p>
-                <p>Difficulty:: {{this.difficulty}}</p>
-                <p>Location:: {{this.location}}</p>
-                <p>Condition:: {{this.conditionStatus}}</p>
-                <p>Condition Details:: {{this.conditionDetails}}</p>
-                <p>Url:: {{this.url}}</p>
-                <p>Rating:: {{this.stars}}</p>
-                <p>Lat/Lon:: {{this.latitude}}, {{this.longitude}}</p>
-                <a href="http://www.google.com/maps/place/{{this.latitude}},{{this.longitude}}" class="text-warning">Map link</a>
-              </li>
-            </ul>
-            {{/each}}
-          </p>
+          {{#each trails.trails}} 
+          <div class="card bg-secondary text-light">
+            <div class="card-body">
+              <div class="card-title">
+                <h5 class="text-warning">{{this.name}}</h5>
+              </div>
+              <p>
+                <strong>Rating:</strong>{{this.stars}}/5
+              </p>
+              <p>
+                <strong>Summary</strong>: {{this.summary}}
+              </p>
+              <p>
+                <strong>Location</strong>: {{this.location}}
+              </p>
+              {{#if this.conditionStatus}}
+                <p>
+                  <strong>Condition</strong>: {{this.conditionStatus}} - {{this.conditionDetails}}
+                </p>
+              {{/if}}
+              <p>
+                <strong>
+                  <a href="{{this.url}}" class="text-warning">Link</a>
+                </strong>
+              </p>
+              <p>
+                <strong>
+                  <a href="http://www.google.com/maps/place/{{this.latitude}},{{this.longitude}}" class="text-warning">Trailhead location</a>
+                </strong>
+              </p>
+            
+            </div>
+          </div>
+          <br> 
+          {{/each}}
         </div>
       </div>
       {{/if}}
