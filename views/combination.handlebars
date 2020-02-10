@@ -1,34 +1,47 @@
-<div class="container">
+<div class="container bg-dark">
   <div class="row">
     <div class="col-8 offset-2">
 
-      <div class="card mt-4">
+      <div class="card mt-4 bg-secondary text-light">
         <div class="card-body">
           <h5 class="card-title">Weather</h5>
-          <p>
-            <strong>Weather</strong>:
-            <ul>
-              <li>
-                <p>Overview</p>
-                <p>Today:: {{weatherOV.main}}</p>
-                {{!-- displays weather icon :) --}}
-                <p>Icon:: {{weatherOV.icon}}</p>
-                <img src="http://openweathermap.org/img/w/{{weatherOV.icon}}.png" alt="">
-              </li>
-              <li>Temperature:: {{weatherMain.temp}}F</li>
-              <li>Feels like:: {{weatherMain.feels_like}}F</li>
-              <li>High:: {{weatherMain.temp_max}}F</li>
-              <li>Low:: {{weatherMain.temp_min}}F</li>
-              <li>Humidity:: {{weatherMain.humidity}}%</li>
-              <li>Wind:: {{weatherWind.speed}}mph</li>
-              <li>{{renderTrails}} // {{renderCamps}}</li>
-            </ul>
-          </p>
+          <div class="row">
+            <div class="col-md-4">
+              <strong>Overview</strong>
+              <ul>
+                <li>
+                  {{!-- <p> --}}
+                    {{weatherOV.main}}
+                    <img src="http://openweathermap.org/img/w/{{weatherOV.icon}}.png" alt="">
+                  {{!-- </p> --}}
+                </li>
+                <li>
+                  Humidity: {{weatherMain.humidity}}%
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-4">
+              <strong>Temperature</strong>
+              <ul>
+                <li>Actual: {{weatherMain.temp}}°F</li>
+                <li>Feel: {{weatherMain.feels_like}}°F</li>
+                <li>Low: {{weatherMain.temp_max}}°F</li>
+                <li>High: {{weatherMain.temp_min}}°F</li>
+              </ul>
+            </div>
+            <div class="col-md-4">
+              <strong>Wind</strong>
+              <ul>
+                <li>Speed: {{weatherWind.speed}}mph</li>
+                <li>Gusts: {{weatherWind.gust}}mph</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
 
       {{#if renderCamps}}
-      <div class="card mt-4">
+      <div class="card mt-4 bg-secondary text-light">
         <div class="card-body">
           <h5 class="card-title">Camps</h5>
           <p>
@@ -49,7 +62,7 @@
       {{/if}}
 
       {{#if renderTrails}}
-      <div class="card mt-4">
+      <div class="card mt-4 bg-secondary text-light">
         <div class="card-body">
           <h5 class="card-title">Trails</h5>
 
@@ -82,4 +95,3 @@
     </div>
   </div>
 </div>
-{{!-- <script src="/js/combo.js"></script> --}}

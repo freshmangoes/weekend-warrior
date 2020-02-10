@@ -75,7 +75,7 @@ module.exports = function(app) {
 	app.get('/location/:search&:radius', async (req, res) => {
 		let search = req.params.search;
 		let radius = req.params.radius;
-		
+
 		console.log(`radius:: ${radius}`);
 		console.log('search::', search);
 		
@@ -84,6 +84,7 @@ module.exports = function(app) {
 		let renderCamps = true;
 
 		const data = await getComboData(search, radius);
+		console.log(data.weatherData);
 
 		// check whether any campgrounds get get pulled from the api
 		if (!data.campsiteData.campgrounds.length) {

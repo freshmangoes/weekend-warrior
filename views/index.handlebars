@@ -1,23 +1,21 @@
 <div id="home">
-  <div class="container">
+  <div class="container bg-secondary">
     <div class="row">
       <div class="col-8 offset-2">
-        {{!-- currently unused --}}
-        {{!-- <h1>{{msg}}</h1> --}}
         <h2>S E A R C H</h2>
         <form class="clearfix mb-4">
           <div class="form-group">
             <label for="search-text">Location input</label>
             <input type="text" id="search-text" class="form-control" aria-describedby="search-text" placeholder="Search a location!">
           </div>
-          <select name="search-radius" id="search-radius" class="btn btn-mini btn-outline-secondary">
+          <select name="search-radius" id="search-radius" class=`btn btn-mini btn-outline-warning">
             <option value="5">5 miles</option>
             <option value="10">10 miles</option>
             <option value="20">20 miles</option>
             <option value="50">50 miles</option>
             <option value="100">100 miles</option>
           </select>
-          <button id="submit" class="btn btn-outline-success float-right">Submit</button>
+          <button id="submit" class="btn btn-outline-warning float-right">Submit</button>
         </form>
         
 
