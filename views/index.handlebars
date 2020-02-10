@@ -17,12 +17,19 @@
           </select>
           <button id="submit" class="btn btn-outline-warning float-right">Submit</button>
         </form>
-        
-
-        
+        <div id = "renderMe"> Recent Searches
+          <ul>
+            {{#each destination_searches}}
+              <div>
+                <a href="/location/{{destination_name}}&10" class="text-warning">{{destination_name}}</a>
+              </div>
+            {{/each}}
+          </ul>
+        </div>        
       </div>
     </div>
   </div>
+
 </div>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

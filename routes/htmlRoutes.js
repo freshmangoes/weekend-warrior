@@ -68,8 +68,17 @@ const getComboData = async (search, radius) => {
 
 module.exports = function(app) {
 	// Load index page
+	// app.get('/', function(req, res) {
+	// 	res.render('index');
+	// });
+
 	app.get('/', function(req, res) {
-		res.render('index');
+		db.destination_search.findAll({}).then(function(data){
+			var hbsObject = JSON.parse(JSON.stringify(data));
+			console.log(hbsObject);
+			console.log(data);
+			res.render('index', {destination_searches: hbsObject});
+		});
 	});
 
 	app.get('/location/:search&:radius', async (req, res) => {
@@ -84,7 +93,7 @@ module.exports = function(app) {
 		let renderCamps = true;
 
 		const data = await getComboData(search, radius);
-		console.log(data.weatherData);
+		// console.log(data.weatherData);
 
 		// check whether any campgrounds get get pulled from the api
 		if (!data.campsiteData.campgrounds.length) {

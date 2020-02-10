@@ -53,7 +53,7 @@ $(document).ready(function() {
 					searches: count,
 					destination_name: searchTextAddVal
 				};
-				//$.put("/api/update/", data_row)
+				// $.put("/api/update/", data_row)
 				//there is no such thing as $.put, so we use an
 				//ajax call instead
 				$.ajax({

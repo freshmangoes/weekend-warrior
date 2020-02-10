@@ -1,7 +1,7 @@
 var db = require('../models');
 module.exports = function(app) {
 	app.post('/api/add', function(req, res) {
-		console.log(req.body);
+		// console.log (req.body)
 		db.destination_search.create(req.body).then(function(dbPost) {
 			res.json(dbPost);
 		});
