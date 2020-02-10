@@ -1,12 +1,17 @@
 var db = require('../models');
+
 module.exports = function(app) {
+
 app.post("/api/add", function(req, res) {
+
 	console.log (req.body)
     db.destination_search.create(req.body)
       .then(function(dbPost) {
         res.json(dbPost);
       });
   });
+
+
 
 app.get("/api/get/:location_name", function(req, res) {
 
@@ -18,6 +23,19 @@ app.get("/api/get/:location_name", function(req, res) {
 		res.json(destination_search)
 	})
 });
+
+app.get("/api/get/", function(req, res) {
+
+	db.destination_search.findAll().then(function(destination_search) {
+		console.log(destination_search)
+		res.json(destination_search)
+	})
+});
+
+
+
+
+
 
 app.put("/api/update/", function(req, res) {
 	console.log("update body")

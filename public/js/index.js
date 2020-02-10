@@ -2,12 +2,15 @@ $(document).ready(function() {
 	// Get references to page elements
 	var $searchText = $('#search-text');
 	var $searchTextAdd = $('#search-text');
-	var $submitBtn = $('#submit');
+	var $submitBtn = $('#submitLocation');
+	var allData;
+
 
 	var handleAddButton = function(event) {
 		event.preventDefault();
 
 		let search = $searchText.val().trim();
+		
 		if (!search) {
 			alert('You must enter a city or town to search nearby!');
 			return;
@@ -15,7 +18,7 @@ $(document).ready(function() {
 
 		let url = `/location/${search}`;
 
-		console.log('hello');
+		console.log('hello handle add button');
 		var data_row;
 		var count;
 		var data_id;
@@ -26,11 +29,11 @@ $(document).ready(function() {
 			.join('');
 
 		//this funtion adds up the number of searches
+		console.log('before the api/get')
 		$.get('api/get/' + searchTextAddVal, function(data) {
 			console.log('data');
 			console.log(data);
-			// console.log("searches" + data.searches)
-			// console.log("ID" + data.id)
+
 			if (Object.keys(data).length === 0) {
 				count = 1;
 				data_row = {
@@ -62,13 +65,37 @@ $(document).ready(function() {
 				});
 			}
 		});
+		
+		console.log('before the api/get')
+		$.get('api/get/' , function(data) {
+			allData = data;
+			console.log("get all");
+			console.log(data);
+			console.log("leaving all");
+
+		});
+		
+
 		if (!searchTextAddVal) {
 			alert('You must enter a city or town to search nearby!');
 			return;
 		}
 
-		location.replace(url);
+		//location.replace(url);
 	};
+	var getAll = function(event){
+		$.get('api/get/' , function(data) {
+			console.log("get all");
+			console.log(data);
+			console.log("leaving all");
+			console.log(data[0].searches);
+			console.log(data[0].destination_name);
+			allData = data;
+		});
+	};
+
+
+
 
 	// Add event listeners to the submit and delete buttons
 	// $submitBtn.on('click', handleAddButton);

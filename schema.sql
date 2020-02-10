@@ -1,3 +1,3 @@
-CREATE DATABASE adventure_db;
+CREATE DATABASE exampledb;
 
-USE adventure_db;
+USE exampledb;
