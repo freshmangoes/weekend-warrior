@@ -1,4 +1,4 @@
-const db = require('../models');
+var db = require('../models/');
 const axios = require('axios');
 
 const getComboData = async (search) => {
@@ -37,7 +37,7 @@ const getComboData = async (search) => {
 			console.error('err::', err);
 		}
 		// return relevant json from data
-		return data.data;
+		return data;
 	};
 
 	const getTrails = async (lat, lon, radius) => {
@@ -49,7 +49,7 @@ const getComboData = async (search) => {
 		} catch (err) {
 			console.error('err::', err);
 		}
-		return data.data;
+		return data;
 	};
 
 	// get weather data :)
@@ -69,14 +69,20 @@ const getComboData = async (search) => {
 module.exports = function(app) {
 	// Load index page
 	app.get('/', function(req, res) {
-		res.render('index');
+		db.destination_search.findAll({}).then(function(data){
+			var hbsObject = JSON.parse(JSON.stringify(data));
+			console.log(hbsObject);
+			console.log(data);
+			res.render('index', {destination_searches: hbsObject});
+		})
+		
 	});
 
 	app.get('/location/:search', async (req, res) => {
 		let search = req.params.search;
-		console.log('search::', search);
+		//console.log('search::', search);
 		const data = await getComboData(search);
-		console.log('data::', JSON.stringify(data, null, 2));
+		//console.log('data::', JSON.stringify(data, null, 2));
 		res.render('combination', {
 			weatherMain: data.weatherData.main,
 			weatherWind: data.weatherData.wind,
@@ -85,6 +91,31 @@ module.exports = function(app) {
 			camps: data.campsiteData
 		});
 	});
+
+
+app.get("/api/add", function (req, res)
+ {
+	console.log("test get");
+	// db.index.findAll({ where: { id: req.params.id } }).then(function (data) {
+	//   index = {
+	// 	searches: data.searches,
+	// 	destination_name: data.destination_name
+	// }
+	  // res.json(index);
+	  res.render("index", index);
+	// });
+  });
+
+// app.get("/index", function (req, res) {
+//     db.Track.findAll({}).then(function (data) {
+
+//       res.render("index", {
+//         searches: data.searches,
+// 			destination_name: data.destination_name
+//       });
+//     });
+//   });
+
 
 
 	app.get('/api/add',function(req,res){
@@ -96,9 +127,9 @@ module.exports = function(app) {
 	})
 
 	// Render 404 page for any unmatched routes
-	// app.get('*', function(req, res) {
-	// 	res.render('404');
-	// });
+	app.get('*', function(req, res) {
+		res.render('404');
+	});
 
 
 };

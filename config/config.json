@@ -2,8 +2,7 @@
   "development": {
     "username": "root",
     "password": "root",
-    "database": "adventure_db",
-    "port": 8889,
+    "database": "exampledb",
     "host": "localhost",
     "dialect": "mysql"
   },
