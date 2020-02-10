@@ -1,7 +1,6 @@
 $(document).ready(function() {
 	// Get references to page elements
 	const $searchText = $('#search-text');
-	const $searchTextAdd = $('#search-text');
 	const $submitBtn = $('#submit');
 	const $searchRadius = $('#search-radius');
 	
@@ -23,13 +22,8 @@ $(document).ready(function() {
 		var count;
 		var data_id;
 
-		let searchTextAddVal = $searchTextAdd
-			.val()
-			.split(' ')
-			.join('');
-
 		//this funtion adds up the number of searches
-		$.get('api/get/' + searchTextAddVal, function(data) {
+		$.get('api/get/' + search, function(data) {
 			console.log('data');
 			console.log(data);
 			// console.log("searches" + data.searches)
@@ -38,7 +32,7 @@ $(document).ready(function() {
 				count = 1;
 				data_row = {
 					searches: count,
-					destination_name: searchTextAddVal
+					destination_name: search
 				};
 				console.log('adding row');
 				$.post('/api/add', data_row);
@@ -51,7 +45,7 @@ $(document).ready(function() {
 				data_row = {
 					id: data[0].id,
 					searches: count,
-					destination_name: searchTextAddVal
+					destination_name: search
 				};
 				// $.put("/api/update/", data_row)
 				//there is no such thing as $.put, so we use an
@@ -65,7 +59,7 @@ $(document).ready(function() {
 				});
 			}
 		});
-		if (!searchTextAddVal) {
+		if (!search) {
 			alert('You must enter a city or town to search nearby!');
 			return;
 		}
