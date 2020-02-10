@@ -1,3 +1,55 @@
 .list-group-item {
   line-height: 2.5;
 }
+
+body {
+  background-image: url("../styles/images/Forest_Sunlight_Background-954.jpg"); 
+  
+}
+
+.navspacing {
+  padding-top: 20px;
+  margin-bottom: 70px;
+}
+.homelink {
+  color:white;
+  font-weight: bold;
+}
+.headpara {
+  font-weight: bold;
+  color: white;
+  margin-top: 40px;
+  font-size: 40px;
+  -webkit-text-stroke: 1px rgb(72, 72, 72);
+}
+.searchlocation {
+  margin-top: 120px;
+  padding-bottom: 20px;
+  color: white;
+  -webkit-text-stroke: 1px rgb(72, 72, 72);
+}
+.navitem {
+  font-weight: bold;
+  
+}
+
+p.boldinfo{
+  font-weight: bold;
+}
+
+
+form {
+  /* margin-top: 190px; */
+}
+.foottext {
+  color: white;
+}
+a.submitbutt {
+  color: white;
+}
+
+footer {
+  color: white;
+  font-weight: bold;
+  padding-top: 350px;
+}

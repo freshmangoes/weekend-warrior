@@ -3,7 +3,6 @@
     "username": "root",
     "password": "root",
     "database": "adventure_db",
-    "port": 8889,
     "host": "localhost",
     "dialect": "mysql"
   },
@@ -20,3 +19,4 @@
     "dialect": "mysql"
   }
 }
+
