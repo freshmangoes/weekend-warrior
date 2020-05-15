@@ -1,7 +1,7 @@
 const db = require('../models');
 const axios = require('axios');
 
-const getComboData = async (search) => {
+const getComboData = async (search, radius) => {
 	// async function to get weather data
 	const getWeather = async (search) => {
 		// city search parameter
@@ -59,9 +59,9 @@ const getComboData = async (search) => {
 	const coords = weatherData.coord;
 
 	// get campsite data :)
-	const campsiteData = await getCampgrounds(coords.lat, coords.lon, 10);
+	const campsiteData = await getCampgrounds(coords.lat, coords.lon, radius);
 	// get trail data :)
-	const trailData = await getTrails(coords.lat, coords.lon, 10);
+	const trailData = await getTrails(coords.lat, coords.lon, radius);
 
 	return { weatherData, campsiteData, trailData };
 };
@@ -69,36 +69,47 @@ const getComboData = async (search) => {
 module.exports = function(app) {
 	// Load index page
 	app.get('/', function(req, res) {
-		res.render('index');
+		db.destination_search.findAll({}).then(function(data){
+			var hbsObject = JSON.parse(JSON.stringify(data));
+			res.render('index', {destination_searches: hbsObject});
+		});
 	});
 
-	app.get('/location/:search', async (req, res) => {
+	app.get('/location/:search&:radius', async (req, res) => {
 		let search = req.params.search;
-		console.log('search::', search);
-		const data = await getComboData(search);
-		console.log('data::', JSON.stringify(data, null, 2));
+		let radius = req.params.radius;
+		
+		// variables to determine what data is getting rendered
+		let renderTrails = true;
+		let renderCamps = true;
+
+		const data = await getComboData(search, radius);
+
+		// check whether any campgrounds get get pulled from the api
+		if (!data.campsiteData.campgrounds.length) {
+			renderCamps = false;
+			console.log(`No campsites`);
+		}
+
+		// check whether any trails get pulled from the api
+		if (!data.trailData.trails.length) {
+			renderTrails = false;
+			console.log(`No trails`);
+		}
+
 		res.render('combination', {
 			weatherMain: data.weatherData.main,
 			weatherWind: data.weatherData.wind,
 			weatherOV: data.weatherData.weather[0],
 			trails: data.trailData,
-			camps: data.campsiteData
+			camps: data.campsiteData,
+			renderTrails: renderTrails,
+			renderCamps: renderCamps
 		});
 	});
 
-
-	app.get('/api/add',function(req,res){
-		res.render('index')
-	})
-
-	app.get("/api/get/:location_name", function(req, res) {
-		res.render('index')
-	})
-
 	// Render 404 page for any unmatched routes
-	// app.get('*', function(req, res) {
-	// 	res.render('404');
-	// });
-
-
+	app.get('*', function(req, res) {
+		res.render('404');
+	});
 };

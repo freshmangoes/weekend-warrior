@@ -16,7 +16,12 @@ app.use(express.static('public'));
 app.engine(
 	'handlebars',
 	exphbs({
-		defaultLayout: 'main'
+    defaultLayout: 'main',
+    helpers: {
+      toJSON: (object) => {
+        return JSON.stringify(object)
+      }
+    }
 	})
 );
 app.set('view engine', 'handlebars');
@@ -34,6 +39,7 @@ if (process.env.NODE_ENV === 'test') {
 }
 
 // Starting the server, syncing our models ------------------------------------/
+// adventures.sync(syncOptions).then( () => {
 db.sequelize.sync(syncOptions).then(function() {
   app.listen(PORT, function() {
     console.log(

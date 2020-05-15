@@ -18,13 +18,10 @@
 // // Makes the adventure Model available for other files (will also create a table)
 // module.exports = adventure;
 
-
-
 module.exports = function(sequelize, DataTypes) {
-    var adventure = sequelize.define("destination_search", {
-        searches: DataTypes.INTEGER,
-        destination_name: DataTypes.STRING
-    });
-    return adventure;
-  };
-  
+	var destination_search = sequelize.define('destination_search', {
+		searches: DataTypes.INTEGER,
+		destination_name: DataTypes.STRING
+	});
+	return destination_search;
+};
