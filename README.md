@@ -7,3 +7,6 @@ Made with NodeJS, Express, Handlebars, MySQL/Sequelize, HikingProject API, OpenW
 - Express for the server backend and API calls
 - Handlebars and jQuery for rendering the front end dynamically
 - Sequelize for storing the search history
+
+# Instructions
+Clone the repo. Run `npm i` in the root directory. Then run `node server.js`.
