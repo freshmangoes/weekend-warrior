@@ -47,7 +47,7 @@ const getComboData = async (search, radius) => {
 		try {
 			data = await axios.get(trailUrl);
 		} catch (err) {
-			console.error('err::', err);
+			// console.error('err::', err);
 		}
 		return data.data;
 	};
@@ -58,27 +58,38 @@ const getComboData = async (search, radius) => {
 	// coordinates for hikingproject search
 	const coords = weatherData.coord;
 
+	// TODO: bandaid fix
+	// ---------------
 	// get campsite data :)
-	const campsiteData = await getCampgrounds(coords.lat, coords.lon, radius);
+	// const campsiteData = await getCampgrounds(coords.lat, coords.lon, radius);
+	const campsiteData = [];
+	// ---------------
+
 	// get trail data :)
 	const trailData = await getTrails(coords.lat, coords.lon, radius);
 
-	return { weatherData, campsiteData, trailData };
+	// console.log('camspiteData', camspiteData);
+	console.log('trailData', trailData);
+	return {
+		weatherData,
+		campsiteData,
+		trailData,
+	};
 };
 
 module.exports = function(app) {
 	// Load index page
 	app.get('/', function(req, res) {
-		db.destination_search.findAll({}).then(function(data){
+		db.destination_search.findAll({}).then(function(data) {
 			var hbsObject = JSON.parse(JSON.stringify(data));
-			res.render('index', {destination_searches: hbsObject});
+			res.render('index', { destination_searches: hbsObject });
 		});
 	});
 
 	app.get('/location/:search&:radius', async (req, res) => {
 		let search = req.params.search;
 		let radius = req.params.radius;
-		
+
 		// variables to determine what data is getting rendered
 		let renderTrails = true;
 		let renderCamps = true;
@@ -86,10 +97,15 @@ module.exports = function(app) {
 		const data = await getComboData(search, radius);
 
 		// check whether any campgrounds get get pulled from the api
-		if (!data.campsiteData.campgrounds.length) {
-			renderCamps = false;
-			console.log(`No campsites`);
-		}
+		// if (!data.campsiteData.campgrounds.length) {
+		// 	renderCamps = false;
+		// 	console.log(`No campsites`);
+		// }
+
+		// TODO: bandaid fix
+		// ---------------
+		renderCamps = false;
+		// ---------------
 
 		// check whether any trails get pulled from the api
 		if (!data.trailData.trails.length) {
@@ -104,7 +120,7 @@ module.exports = function(app) {
 			trails: data.trailData,
 			camps: data.campsiteData,
 			renderTrails: renderTrails,
-			renderCamps: renderCamps
+			renderCamps: renderCamps,
 		});
 	});
 
