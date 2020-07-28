@@ -9,4 +9,6 @@ Made with NodeJS, Express, Handlebars, MySQL/Sequelize, HikingProject API, OpenW
 - Sequelize for storing the search history
 
 # Instructions
-Clone the repo. Run `npm i` in the root directory. Then run `node server.js`.
+Clone the repo. Run `npm i` in the root directory. Then run `node server.js`. Then open http://localhost:3000 in your web browser!
+
+![Example Gif](./ww-gif.gif)
